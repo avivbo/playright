@@ -32,8 +32,8 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
-
       - name: Upload Playwright report to S3
+        if: always()
         run: |
           REPORT_DIR="run-${{ github.run_id }}-${{ github.run_attempt }}"
           aws s3 cp ./playwright-report s3://$S3_BUCKET/$REPORT_DIR/ --recursive
